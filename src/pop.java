@@ -12,11 +12,31 @@ public class pop {
 		int x;
 	  DBConnector b=new DBConnector("root", "");
           
+          /*CaneSample cs = new CaneSample();
+          
+          b.putCaneSample(cs);*/
+          
+          /*CaneSampleEntryWindow win = new CaneSampleEntryWindow(10001,"root","");
+          win.setVisible(true);*/
+          
+          /*BoilerWaterTestEntry bwt = new BoilerWaterTestEntry(10001,"root","");
+          bwt.setVisible(true);*/
+
+          /*PANSampleEntryForm bwt2 = new PANSampleEntryForm(10001,"root","");
+          bwt2.setVisible(true);*/
+
+          
+          JuiceSampleEntryForm win = new JuiceSampleEntryForm(10001,"root","");
+          win.setVisible(true);
+          
+          
+          
+          
           //putStock(int fid, String grade, float weight, float cost, int stockid,  String date)
          // b.putStock(1, "A", 34, 34, 1, "dateee");
           
-          NewFarmerEntryWindow fe= new NewFarmerEntryWindow ("root","");
-          fe.setVisible(true);
+         // NewFarmerEntryWindow fe= new NewFarmerEntryWindow ("root","");
+         // fe.setVisible(true);
           /*StockEntryWindow sew= new StockEntryWindow("root","");
           sew.setVisible(true);*/
          // fe.setVisible(true);

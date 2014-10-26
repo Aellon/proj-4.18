@@ -9,17 +9,11 @@
  * @author Randika
  */
 public class Sample {
-    private int sample_id,farmer_id;
+    private int sample_id;
     private String date;
     private String time;
 
-    public int getFarmer_id() {
-        return farmer_id;
-    }
-
-    public void setFarmer_id(int farmer_id) {
-        this.farmer_id = farmer_id;
-    }
+    
     
     
      

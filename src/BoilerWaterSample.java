@@ -1,9 +1,7 @@
 
-/**
- *
- * @author Randika
- */
+
 public class BoilerWaterSample extends Sample{
+    
     private double ph,tds,hydrazene,sugarTrace,alkalinityP,alkalinityO,phosphate;
 
     public double getPh() {

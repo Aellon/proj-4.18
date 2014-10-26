@@ -1,29 +1,53 @@
 
 public class CaneJuiceSample extends Sample{
-    private float brix,polarity,purity;
+   
+    private SampleEntity firstExpressedJuice;
+    private SampleEntity lastExpressedJuice;
+    private SampleEntity mixedJuice;
+    private SampleEntity clarifiedJuice;
+    private SampleEntity syrup;
+    private SampleEntity filtrate;
+
+    public CaneJuiceSample(SampleEntity firstExpressedJuice, SampleEntity lastExpressedJuice, SampleEntity mixedJuice, SampleEntity clarifiedJuice, SampleEntity syrup, SampleEntity filtrate) {
+        this.firstExpressedJuice = firstExpressedJuice;
+        this.lastExpressedJuice = lastExpressedJuice;
+        this.mixedJuice = mixedJuice;
+        this.clarifiedJuice = clarifiedJuice;
+        this.syrup = syrup;
+        this.filtrate = filtrate;
+    }
+    
     
 
-    public float getBrix() {
-        return brix;
+    public SampleEntity getFirstExpressedJuice() {
+        return firstExpressedJuice;
     }
 
-    public void setBrix(float brix) {
-        this.brix = brix;
+    public SampleEntity getLastExpressedJuice() {
+        return lastExpressedJuice;
     }
 
-    public float getPolarity() {
-        return polarity;
+    public SampleEntity getMixedJuice() {
+        return mixedJuice;
     }
 
-    public void setPolarity(float polarity) {
-        this.polarity = polarity;
+    public SampleEntity getClarifiedJuice() {
+        return clarifiedJuice;
     }
 
-    public float getPurity() {
-        return purity;
+    public SampleEntity getSyrup() {
+        return syrup;
     }
 
-    public void setPurity(float purity) {
-        this.purity = purity;
+    public SampleEntity getFiltrate() {
+        return filtrate;
     }
+    
+    
+    
+    
+    
+    
+    
+    
 }

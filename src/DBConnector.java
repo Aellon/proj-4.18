@@ -3,9 +3,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
-
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 //this is the class which connects entire software to the data base
 
@@ -231,7 +233,7 @@ public CaneSample getCSample(int id)  {
                         smpl.setSampleNo(resultSet.getInt("Sample_id"));
                         smpl.setFarmer_id(resultSet.getInt("Farmer_id"));
                         smpl.setBC_GC(resultSet.getString("BC/GC"));
-                        smpl.setPolarity(resultSet.getFloat("pol"));
+                        smpl.setPol(resultSet.getFloat("pol"));
                         smpl.setPurity(resultSet.getInt("Purity"));
 
 
@@ -253,6 +255,111 @@ public CaneSample getCSample(int id)  {
 		 return null;// new Farmer("no name", "null",  000, "no", 000, " null");
 	 }
 	 
+
+
+// this method is used to insert a new cane sample to the system
+public void updateCaneSample(int Sample_id,float Brix,float Polarity, float Purity,float Rendement,float IncorrectedBrix){
+    
+    
+    
+    
+    String insert="UPDATE cane_sample Brix="+Brix+",Pol="+Polarity+",Purity="+Purity+",Rendement="+Rendement+" WHERE Sample_id="+Sample_id+"";
+	try {
+		preparedStatement = con.prepareStatement(insert);
+		preparedStatement.execute();
+	} catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Update Failed");
+	}
+    
+    
+}
+
+public void putCaneSample(CaneSample cs){
+    
+    
+    int farmer_id =cs.getFarmer_id();
+    float brix = cs.getBrix();
+    String type =cs.getBC_GC();
+    float pol = cs.getPol();
+    float purity = cs.getPurity();
+    float rendement = cs.getRendament();
+    String grade = cs.getGrade();
+    String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());    
+    String time =  new SimpleDateFormat("HH:mm").format(new Date());
+    
+    
+    
+    
+String insert="INSERT INTO cane_sample (Farmer_id,Brix,BC/GC,Pol,Purity,Rendement,Grade,Date,Time) VALUES("+farmer_id+","+brix+","+type+","+pol+","+purity+","+rendement+","+grade+","+date+","+time+")";
+              // String insert="INSERT INTO cane_sample (Farmer_id) values("+farmer_id+")"; 
+        try {  
+        preparedStatement = con.prepareStatement(insert);
+        preparedStatement.execute();
+        
+	} catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Operation Unsuccessful");
+	}
+ 
+ 
+}
+
+public void putWaterSample(double ph,double tds,double hydrazine,double sugarTrace,double alkalinityP,double alkalinityO,double phosphate){
+    
+    String insert="INSERT INTO boiler_water_sample (ph,TDS,hardness,hydrazine,alkalinity_p,alkalinity_o,Phosphate) VALUES("+ph+","+tds+","+hydrazine+","+sugarTrace+","+alkalinityP+","+alkalinityO+","+phosphate+")";
+    
+    try {  
+        preparedStatement = con.prepareStatement(insert);
+        preparedStatement.execute();
+        
+	} catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Operation Unsuccessful");
+	}
+    
+    
+}
+
+    public void putPANSample( float volume, float brix,float polarity,float purity){
+        
+         String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());    
+         String time =  new SimpleDateFormat("HH:mm").format(new Date());
+        
+        String input = "INSERT INTO pan_sample (date,time,brix,polarity,purity,volume)VALUES ("+date+","+time+","+brix+","+polarity+","+purity+")";
+        
+        try {  
+        preparedStatement = con.prepareStatement(input);
+        preparedStatement.execute();
+        JOptionPane.showMessageDialog(null,"Operation Successful");
+
+        
+	} catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Operation Unsuccessful");
+	}
+        
+    }
+    
+   public void putJuiceSample(CaneJuiceSample js){
+       
+      // sample_idF XJBrix FXJPol FXJPty MXJBrix MXJPol MXJPty LMJBrix LMJPol LMJPty CLJBrix CLJPol CLJPty SBrix SPol SPty FILBrix FILPol FILPty
+       
+       //String input = "INSERT INTO juice_sample (sample_id,FXJBrix, FXJPol, FXJPty ,MXJBrix, MXJPol, MXJPty ,LMJBrix, LMJPol ,LMJPty ,CLJBrix ,CLJPol ,CLJPty ,SBrix, SPol ,SPty ,FILBrix ,FILPol ,FILPty)VALUES ()";
+        
+       String input = "INSERT INTO juice_sample(sample_id) values (63985)";
+        try {  
+        preparedStatement = con.prepareStatement(input);
+        preparedStatement.execute();
+        JOptionPane.showMessageDialog(null,"Operation Successful");
+
+        
+	} catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Operation Unsuccessful");
+	}
+       
+       
+   }
 
 
 
