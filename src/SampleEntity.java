@@ -10,15 +10,16 @@
  */
 public class SampleEntity {
     
-    private float brix;
-    private float pol;
-    private float purity;
-    private float pH;
+    private float brix=0;
+    private float pol=0;
+    private float purity=0;
+    private float pH=0;
     
 
     public SampleEntity(float brix, float pol) {
         this.brix = brix;
         this.pol = pol;
+        this.purity=(brix/pol)*100;
     }
     
     

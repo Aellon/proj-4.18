@@ -8,18 +8,18 @@ public class JuiceSampleEntryForm extends javax.swing.JFrame {
 
     DBConnector db ;
     
-    public JuiceSampleEntryForm(int id,String user,String pswd) {
+    public JuiceSampleEntryForm( DBConnector d) {
         initComponents();
       //  this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
-        db=new DBConnector(user, pswd);
+        this.db=d;
         
         
-        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+       /* btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
-            }
-        });
+                btnSubmitActionPerformed(evt);*/
+          //  }
+       // });
         
         
         

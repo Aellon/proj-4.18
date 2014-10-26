@@ -12,6 +12,9 @@ public class pop {
 		int x;
 	  DBConnector b=new DBConnector("root", "");
           
+          Home home = new Home("root", "");
+          home.setVisible(true);
+          
           /*CaneSample cs = new CaneSample();
           
           b.putCaneSample(cs);*/
@@ -25,9 +28,9 @@ public class pop {
           /*PANSampleEntryForm bwt2 = new PANSampleEntryForm(10001,"root","");
           bwt2.setVisible(true);*/
 
-          
-          JuiceSampleEntryForm win = new JuiceSampleEntryForm(10001,"root","");
-          win.setVisible(true);
+           // System.out.println(b.getWeightList(1));
+          //JuiceSampleEntryForm win = new JuiceSampleEntryForm(b);
+          //win.setVisible(true);
           
           
           

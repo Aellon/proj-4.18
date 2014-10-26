@@ -1,3 +1,5 @@
+import Calculators.AlcalinityCalulator;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -342,12 +344,15 @@ public void putWaterSample(double ph,double tds,double hydrazine,double sugarTra
     
    public void putJuiceSample(CaneJuiceSample js){
        
-      // sample_idF XJBrix FXJPol FXJPty MXJBrix MXJPol MXJPty LMJBrix LMJPol LMJPty CLJBrix CLJPol CLJPty SBrix SPol SPty FILBrix FILPol FILPty
+                                                                                                                                                                                                                                                                                                                                                                                                                     // sample_idF XJBrix FXJPol FXJPty MXJBrix MXJPol MXJPty LMJBrix LMJPol LMJPty CLJBrix CLJPol CLJPty SBrix SPol SPty FILBrix FILPol FILPty
        
-       //String input = "INSERT INTO juice_sample (sample_id,FXJBrix, FXJPol, FXJPty ,MXJBrix, MXJPol, MXJPty ,LMJBrix, LMJPol ,LMJPty ,CLJBrix ,CLJPol ,CLJPty ,SBrix, SPol ,SPty ,FILBrix ,FILPol ,FILPty)VALUES ()";
+       String input = "INSERT INTO juice_sample (FXJBrix, FXJPol, FXJPty ,MXJBrix, MXJPol, MXJPty ,LMJBrix, LMJPol ,LMJPty ,CLJBrix ,CLJPol ,CLJPty ,SBrix, SPol ,SPty ,FILBrix ,FILPol ,FILPty)VALUES ("+js.getFirstExpressedJuice().getBrix()+", "+js.getFirstExpressedJuice().getPol()+", "+js.getFirstExpressedJuice().getPurity()+", "+js.getMixedJuice().getBrix()+", "+js.getMixedJuice().getPol()+", "+js.getMixedJuice().getPurity()+", "+js.getLastExpressedJuice().getBrix()+", "+js.getLastExpressedJuice().getPol()+", "+js.getLastExpressedJuice().getPurity()+", "+js.getClarifiedJuice().getBrix()+", "+js.getClarifiedJuice().getPol()+", "+js.getClarifiedJuice().getPurity()+", "+js.getSyrup().getBrix()+", "+js.getSyrup().getPol()+", "+js.getSyrup().getPurity()+", "+js.getFiltrate().getBrix()+", "+js.getFiltrate().getPol()+", "+js.getFiltrate().getPurity()+")";
         
-       String input = "INSERT INTO juice_sample(sample_id) values (63985)";
-        try {  
+       
+       System.out.println(input);
+               
+    //  String input = "INSERT INTO juice_sample (FXJBrix, FXJPol, FXJPty ,MXJBrix, MXJPol, MXJPty ,LMJBrix, LMJPol ,LMJPty ,CLJBrix ,CLJPol ,CLJPty ,SBrix, SPol ,SPty ,FILBrix ,FILPol ,FILPty)VALUES (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)";
+      try {  
         preparedStatement = con.prepareStatement(input);
         preparedStatement.execute();
         JOptionPane.showMessageDialog(null,"Operation Successful");
@@ -361,8 +366,52 @@ public void putWaterSample(double ph,double tds,double hydrazine,double sugarTra
        
    }
 
+ public ResultSet getGradeList(int id)  {
+                 String set="";
+		 String ew="select * from stock where Farmer_id=?";
+		 try {
+			preparedStatement = con.prepareStatement(ew);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();	
+			
+				return resultSet;
+		} catch (SQLException e) {
+			System.out.println("No Grade found");
+		}
+		 return null;// new Farmer("no name", "null",  000, "no", 000, " null");
+	 }
 
 
 
+    public void putWaterSample(String type,double ph,double tds,double hydrazine,double sugarTrace,double alkalinityP,double alkalinityO,double phosphate){
+    
+    String input = null;
+    
+    AlcalinityCalulator cal = new AlcalinityCalulator();
+    alkalinityP =cal.getAlkalinity(alkalinityP);
+     alkalinityO =cal.getAlkalinity(alkalinityO);
+     
+     
+    
+    if(type.equals("b1"))    
+    input="INSERT INTO boiler_water_sample (ph,TDS,hardness,hydrazine,alkalinity_p,alkalinity_o,Phosphate) VALUES("+ph+","+tds+","+hydrazine+","+sugarTrace+","+alkalinityP+","+alkalinityO+","+phosphate+")";
+    else if(type.equals("b2"))
+        input="INSERT INTO boiler_water_sample_2 (ph,TDS,hardness,hydrazine,alkalinity_p,alkalinity_o,Phosphate) VALUES("+ph+","+tds+","+hydrazine+","+sugarTrace+","+alkalinityP+","+alkalinityO+","+phosphate+")";
+    else if (type.equals("fw"))
+        input="INSERT INTO feed_water_sample (ph,TDS,hardness,hydrazine,alkalinity_p,alkalinity_o,Phosphate) VALUES("+ph+","+tds+","+hydrazine+","+sugarTrace+","+alkalinityP+","+alkalinityO+","+phosphate+")";
+    
+    
+    try {  
+        preparedStatement = con.prepareStatement(input);
+        preparedStatement.execute();
+       // JOptionPane.showMessageDialog(null,"Operation successful");
+        
+    } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Operation Unsuccessful");
+    }
+    
+    
+}
 
 }

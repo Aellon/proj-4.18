@@ -13,7 +13,7 @@ private DBConnector db;
     /**
      * Creates new form CaneSampleEntryWindow
      */
-    public CaneSampleEntryWindow(int id,String user,String pswd) {
+    public CaneSampleEntryWindow(String user,String pswd) {
         
         db=new DBConnector(user, pswd);
         
